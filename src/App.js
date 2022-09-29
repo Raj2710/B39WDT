@@ -1,25 +1,26 @@
-import logo from './logo.svg';
 import './App.css';
+import {useState} from 'react';
+import Dashboard from './components/Dashboard';
+import Sidebar from './components/Sidebar';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+  let data={
+    earningsMonthly:"4,00,000",
+    earningsAnnual:"48,00,000",
+    task:20,
+    pendingRequest:18
+  }
+  const [value,setValue] = useState("Hai")
+  return <>
+      <div id='wrapper'>
+          <Sidebar/>
+          <h1>{value}</h1>
+          <Dashboard data={{data,setValue}}/>
+
+          
+      </div>
+  </>
 }
 
 export default App;

@@ -1,7 +1,10 @@
 import './App.css';
-import {useState} from 'react';
+import { useState } from 'react';
 import Dashboard from './components/Dashboard';
 import Sidebar from './components/Sidebar';
+import AddUser from './components/AddUser'
+import {BrowserRouter,Routes,Route,Navigate} from 'react-router-dom'
+import EditUser from './components/EditUser';
 
 function App() {
 
@@ -11,13 +14,45 @@ function App() {
     task:20,
     pendingRequest:18
   }
-  const [value,setValue] = useState("Hai")
+
+  let [users,setUsers] = useState([
+    {
+      name:"Shivam",
+      email:"shivam@gmail.com",
+      batch:"B39WDT",
+      mobile:"9876543210"
+    },
+    {
+      name:"Syed",
+      email:"syed@gmail.com",
+      batch:"B39WDT",
+      mobile:"9123456789"
+    },
+    {
+      name:"Ashok",
+      email:"ashok@gmail.com",
+      batch:"B39WDT",
+      mobile:"9859877321"
+    }
+  ])
+
   return <>
       <div id='wrapper'>
-          <Sidebar/>
-          <h1>{value}</h1>
-          <Dashboard data={{data,setValue}}/>
+      
+         <BrowserRouter>
+         <Sidebar/>
 
+            <Routes>
+                <Route path='/dashboard' element={<Dashboard data={{data,users,setUsers}}/>}/>
+                <Route path='/add-user' element={<AddUser data={{users,setUsers}}/>}/>
+                <Route path='/edit-user/:id' element={<EditUser  data={{users,setUsers}}/> }/> 
+                <Route path='*' element={<Navigate to='/add-user'/>}/>
+            </Routes>
+            
+         </BrowserRouter>
+          
+      
+          
           
       </div>
   </>
